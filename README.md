@@ -10,11 +10,13 @@
  4. 获取软键盘的高度
  5. 获取屏幕的高度（不包含虚拟按键），版本 0.0.9
  6. 为下载添加token参数，版本0.1
+ 7. 增加wxframework版本的兼容性,将工程切换至eros-plugin-android-extend
+ 
 ## Usage
 ###  Add dependency
 ```groovy
 	dependencies {
-	        implementation 'com.github.heynchy:eros-plugin-filecache-manager:0.1'
+	        implementation 'com.github.heynchy:eros-plugin-android-extend:v0.1.1'
 	}
 
 ```
