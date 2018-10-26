@@ -1,6 +1,6 @@
 # eros-plugin-android-extend
 
-####  当前工具类支持--基础依赖包wxframework > 1.0.9 的版本：v1.1.0 , v1.1.1
+####  当前工具类支持--基础依赖包wxframework > 1.0.9 的版本：v1.1.0 , v1.1.1,....
 ####  如果您的基础依赖包wxframework <= 1.0.9 的版本, 可前往: [eros-plugin-filecache-manager](https://github.com/heynchy/eros-plugin-filecache-manager)；
 
 ### 基于Eros框架下的相关功能（weex 与 Android 的交互）：
