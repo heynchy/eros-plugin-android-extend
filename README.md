@@ -17,7 +17,7 @@
 ###  Add dependency
 ```groovy
 	dependencies {
-	        implementation 'com.github.heynchy:eros-plugin-android-extend:v0.1.1'
+	        implementation 'com.github.heynchy:eros-plugin-android-extend:v0.1.2'
 	}
 
 ```
@@ -163,7 +163,17 @@
   }
 </script>
 ```
-
+#### 注意事项
+    1. 涉及到相关权限问题，需要手动添加至自己工程的AndroidManifest.xml中（针对上架的权限审核问题）
+       1.1 文件操作权限包括：
+           <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+           <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /
+       1.2 网络权限：
+            <uses-permission android:name="android.permission.INTERNET" /> 
+       1.3 Android 8.0以上版本的APk安装时，需要安装权限：
+            <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+	    
+	    
 License
 -------
     Copyright 2018 heynchy
