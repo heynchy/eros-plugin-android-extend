@@ -20,12 +20,13 @@
         本地存储和JS端的存储可通用， 即Android端可根据key值获取JS存储的数据；
         JS端可根据key值获取Android端存储的数据；      版本v0.1.4
     11. 增加选择本地文件并上传功能  版本v0.1.5
+    12. 增加打开xlsx文件的功能  版本v0.1.6
  
 ## Usage
 ###  Add dependency
 ```groovy
 	dependencies {
-	        implementation 'com.github.heynchy:eros-plugin-android-extend:v0.1.5'
+	        implementation 'com.github.heynchy:eros-plugin-android-extend:v0.1.6'
 	}
 
 ```
