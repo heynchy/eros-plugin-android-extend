@@ -21,12 +21,14 @@
         JS端可根据key值获取Android端存储的数据；      版本v0.1.4
     11. 增加选择本地文件并上传功能  版本v0.1.5
     12. 增加打开xlsx文件的功能  版本v0.1.6
+    13. 增加获取apk包的MD5值的方法， 用以完整性校验 版本v0.1.7
+    14. 增加强制退出app的功能（kill进程） 版本v0.1.8
  
 ## Usage
 ###  Add dependency
 ```groovy
 	dependencies {
-	        implementation 'com.github.heynchy:eros-plugin-android-extend:v0.1.6'
+	        implementation 'com.github.heynchy:eros-plugin-android-extend:v0.1.8'
 	}
 
 ```
@@ -208,7 +210,24 @@
 			   ......
       2.  acitivityName如果为null, 则打开后默认跳转至app的启动页
       3.  如果要在两个app之间传递参数，则key值需保持一致，才能接收到 getIntent().getStringExtra(key);
-			 
+      
+    2.4 获取应用宝的MD5
+```java
+       weex.requireModule('UtilModule').getAPKMD5Code(success =>{
+            console.log("chy1234", "success===="+success);
+            this.$notice.alert({
+                message:'success====='+success
+            });
+        }, failure=>{
+            this.$notice.alert({
+                message:'failure====='+failure
+            });
+        });
+```
+     2.5 强制退出APP
+```java
+        weex.requireModule('UtilModule').exitAPP();
+```
 ### Android 原生方法工具类
 ####  存储工具类 ErosStorageUtil
 ##### 相关方法：
