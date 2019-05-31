@@ -2,7 +2,9 @@ package com.heyn.erosplugin.wx_filemanger.module;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Rect;
+import android.os.Process;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -21,7 +23,14 @@ import com.taobao.weex.annotation.JSMethod;
 import com.taobao.weex.bridge.JSCallback;
 import com.taobao.weex.common.WXModule;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.reflect.Method;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 
 /**
@@ -140,6 +149,35 @@ public class UtilModule extends WXModule {
             callback.invoke(hight);
         }
     }
+    /**
+     * 获取Android APK 包的MD5值用于完整性校验
+     *
+     * @param success
+     * @param failure
+     */
+    @JSMethod(uiThread = true)
+    public void getAPKMD5Code(final JSCallback success, final  JSCallback failure) {
+        String apkPath = mWXSDKInstance.getContext().getPackageCodePath(); // 获取Apk包存储路径
+        try {
+            MessageDigest dexDigest = MessageDigest.getInstance("MD5");
+            byte[] bytes = new byte[1024];
+            int byteCount;
+            FileInputStream fis = new FileInputStream(new File(apkPath)); // 读取apk文件
+            while ((byteCount = fis.read(bytes)) != -1) {
+                dexDigest.update(bytes, 0, byteCount);
+            }
+            BigInteger bigInteger = new BigInteger(1, dexDigest.digest()); // 计算apk文件的哈希值
+            String sha = bigInteger.toString(16);
+            fis.close();
+            success.invoke(sha);
+        } catch (NoSuchAlgorithmException e) {
+            failure.invoke(e.getMessage());
+        } catch (FileNotFoundException e) {
+            failure.invoke(e.getMessage());
+        } catch (IOException e) {
+            failure.invoke(e.getMessage());
+        }
+    }
 
     public void addOnSoftKeyBoardVisibleListener(Activity activity, final IKeyBoardVisibleListener listener) {
         final View decorView = activity.getWindow().getDecorView();
@@ -164,6 +202,15 @@ public class UtilModule extends WXModule {
                 isVisiableForLast = visible;
             }
         });
+    }
+
+    /**
+     * 强制退出APP（KILL PROGRESS）
+     */
+    @JSMethod(uiThread = true)
+    public void exitAPP() throws PackageManager.NameNotFoundException {
+        // 强制退出程序
+        Process.killProcess(Process.myPid());
     }
 
 
